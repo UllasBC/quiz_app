@@ -1,9 +1,12 @@
 import React from "react";
-import {Helmet} from 'react-helmet';
-import '../../../src/App.css';
+import { Helmet } from "react-helmet";
+import "../../../src/App.css";
 
+import { Link } from "react-router-dom";
 
-export function WelcomePage() {
+//import {useHistory} from "react-router-dom";
+
+export function WelcomePage(props) {
   return (
     <React.Fragment>
       <Helmet>
@@ -19,9 +22,14 @@ export function WelcomePage() {
             <h1 className="App">React Quiz</h1>
           </center>
           <center>
-            <button input type={"submit"}>
-              Start
-            </button>
+            <Link to="/questionPage">Link Start</Link>
+              <button
+                type={"submit"}
+                onClick={() => props.history.push("/questionPage")}
+              >
+                Start
+              </button>
+            
           </center>
         </div>
       </div>

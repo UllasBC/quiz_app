@@ -1,14 +1,52 @@
-import React from 'react'
+import React from "react";
 
-// import { BrowserRouter as Router , Switch, Route } from 'react-router-dom';
- import { WelcomePage } from './Routes/WelcomePage';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { WelcomePage } from "./Routes/WelcomePage";
+import { QuestionsPage } from "./Routes/QestionsPage";
 // import { QuestionsPage } from './Routes/QestionsPage';
-//import {Header} from './Components/Header'
+// import {Header} from './Components/Header'
 
-function App() {
+const App = () => {
   return (
-<WelcomePage></WelcomePage>
+    <>
+      <Router>
+        <Switch>
+          <Route component={WelcomePage} path="/"  exact/>
+          <Route component={QuestionsPage} path="/questionPage"/>
+          <Route component={Error} />
+          </Switch> 
+      </Router>
+    </>
+
+    // <Router>
+    //   <Switch>
+    //   <Route path={'/quiz'} exact>
+    //       <QuestionsPage/>
+    //     </Route>
+    //     <Route path={'/quiz/app'} exact>
+    //     <WelcomePage/>
+    //     </Route>
+
+    //   </Switch>
+    // </Router>
+
+    // <Router>
+    //   <Switch>
+
+    //     <Route path={'/quiz'} exact>
+    //       <QuestionsPage/>
+    //     </Route>
+
+    //     <Route path={'/quiz/app'} exact>
+    //       <WelcomePage/>
+    //     </Route>
+
+    //     <Route path={'/'}>
+    //       <WelcomePage/>
+    //     </Route>
+    //   </Switch>
+    // </Router>
   );
-}
+};
 
 export default App;
