@@ -9,21 +9,29 @@ export function QuestionsPage() {
     <div className="App">
       <div className="App-header">
         <h2>Quiz Assignment :</h2>
-        <Question body={"Hello"} />
-        {/* {
+      </div>
+      <div className="questions">
+      <Question body={"Hello"} />
+      </div>
+     
+      {/* {
             [1,2,3,4].map((item,index)=>{
               return (<Option body={item}/>)
              })
         } */}
-
-        {[1, 2, 3, 4].map((item, index) =>( <Option body={item} />))}
-        <NavButton body={"Next"} />
-        <NavButton body={"Previous"} />
-        {/* <Option body={'1'}/>
+      <div className="answerOptions" >
+        {[1, 2, 3, 4].map((item, index) => (
+          <Option body={item} />
+        ))}
+        </div>
+        <div className="bottom-footer">
+        <NavButton className="next-btn" body={"Next"} />
+        <NavButton className="Previous-btn" body={"Previous"} />
+      </div>
+      {/* <Option body={'1'}/>
         <Option body={'2'}/>
         <Option body={'3'}/>
         <Option body={'4'}/> */}
-      </div>
     </div>
   );
 }

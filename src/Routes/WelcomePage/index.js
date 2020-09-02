@@ -2,7 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet";
 import "../../../src/App.css";
 
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 //import {useHistory} from "react-router-dom";
 
