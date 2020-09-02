@@ -25,8 +25,8 @@ export function QuestionsPage() {
         ))}
         </div>
         <div className="bottom-footer">
-        <NavButton className="next-btn" body={"Next"} />
-        <NavButton className="Previous-btn" body={"Previous"} />
+        <NavButton body={"Next"} />
+        <NavButton body={"Previous"} />
       </div>
       {/* <Option body={'1'}/>
         <Option body={'2'}/>
