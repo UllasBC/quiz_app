@@ -3,12 +3,9 @@ import { Question } from "../../Components/Question";
 import { Option } from "../../Components/Option";
 import { NavButton } from "../../Components/NavButton";
 
-
 import "../../App.css";
 
-
 export function QuestionsPage() {
-
   const questions = [
     {
       question: "Which is the lates version of react?",
@@ -23,6 +20,18 @@ export function QuestionsPage() {
   //let questionIndex = 0;
   //Hooks for state management
   const [questionIndex, setQuestionIndex] = useState(0);
+
+  const [optionSelected, setOptionSelected] = useState({});
+
+  //Option Fun
+  const onOptionChange = (optionIndex) => {
+    // optionSelected[questionIndex] = optionIndex;
+    //console.log(optionSelected);
+    var obj = {};
+    obj[questionIndex] = optionIndex;
+
+     setOptionSelected({...optionSelected, ...obj});
+  };
 
   //NextButton fun
   const onNextBtnClick = () => {
@@ -40,6 +49,10 @@ export function QuestionsPage() {
     }
   };
 
+  //Op
+console.log(optionSelected);
+
+ // console.log(questionIndex in optionSelected && optionSelected[questionIndex] == 0 +1 ? true:false);
 
   return (
     <div className="App">
@@ -59,7 +72,12 @@ export function QuestionsPage() {
         } */}
       <div className="answerOptions">
         {questions[questionIndex].options.map((item, index) => (
-          <Option body={`${index + 1}. ${item}`} />
+          <Option
+            onChange={onOptionChange}
+            checked = {questionIndex in optionSelected && optionSelected[questionIndex] === index +1 ? true:false} 
+            body={`${index + 1}. ${item}`}
+            optionIndex={index + 1}
+          />
         ))}
       </div>
       <div className="bottom-footer">
