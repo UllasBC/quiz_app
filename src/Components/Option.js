@@ -4,7 +4,7 @@ export const Option = (props) => {
   return (
     <>
       <input
-        type="radio" name="option" checked={props.checked}
+        type="checkbox" name="option" checked={props.checked}
         onChange={() => {
           props.onChange(props.optionIndex);
         }}

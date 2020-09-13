@@ -3,34 +3,46 @@ import { Question } from "../../Components/Question";
 import { Option } from "../../Components/Option";
 import { NavButton } from "../../Components/NavButton";
 
+
 import "../../App.css";
 
-export function QuestionsPage() {
+export function QuestionsPage(props) {
   const questions = [
     {
       question: "Which is the lates version of react?",
       options: [16, 17, 18, 19],
+      correctOptionIndex: 1
     },
     {
       question: "Does ReactJS is openSource",
       options: ["false", "true"],
+      correctOptionIndex: 2
     },
   ];
 
+  
   //let questionIndex = 0;
   //Hooks for state management
   const [questionIndex, setQuestionIndex] = useState(0);
 
   const [optionSelected, setOptionSelected] = useState({});
 
+  
+
   //Option Fun
   const onOptionChange = (optionIndex) => {
     // optionSelected[questionIndex] = optionIndex;
     //console.log(optionSelected);
-    var obj = {};
-    obj[questionIndex] = optionIndex;
+     if(questionIndex in optionSelected && optionSelected[questionIndex] == optionIndex){
+      const options = {...optionSelected};
+      delete options[questionIndex];
+      setOptionSelected(options);
+     }else{
+      var obj = {};
+      obj[questionIndex] = optionIndex;
+      setOptionSelected({ ...optionSelected, ...obj });
+    }
 
-     setOptionSelected({...optionSelected, ...obj});
   };
 
   //NextButton fun
@@ -49,10 +61,37 @@ export function QuestionsPage() {
     }
   };
 
-  //Op
-console.log(optionSelected);
+  //onBtnClear function
+  const onClearBtnClick = () =>{ 
+    if(questionIndex in optionSelected){
+      const options = {...optionSelected};
+      delete options[questionIndex];
+      setOptionSelected(options);
+    }else{
+      console.log("No options been selectd");
+    }
 
- // console.log(questionIndex in optionSelected && optionSelected[questionIndex] == 0 +1 ? true:false);
+  }
+  
+  //onBtnSubmitClick
+  const onBtnSubmitClick = () =>{
+    let score=0;
+    for (const questionIndex in optionSelected) {
+      let userSelectedOptionIndex = optionSelected[questionIndex]
+      if(questions[questionIndex].correctOptionIndex == userSelectedOptionIndex){
+        score++;
+      } 
+
+    }
+    props.history.push("/results",{score:score, total:questions.length});
+  
+
+
+  }
+  //Op
+  console.log(optionSelected);
+
+  // console.log(questionIndex in optionSelected && optionSelected[questionIndex] == 0 +1 ? true:false);
 
   return (
     <div className="App">
@@ -74,7 +113,12 @@ console.log(optionSelected);
         {questions[questionIndex].options.map((item, index) => (
           <Option
             onChange={onOptionChange}
-            checked = {questionIndex in optionSelected && optionSelected[questionIndex] === index +1 ? true:false} 
+            checked={
+              questionIndex in optionSelected &&
+              optionSelected[questionIndex] === index + 1
+                ? true
+                : false
+            }
             body={`${index + 1}. ${item}`}
             optionIndex={index + 1}
           />
@@ -88,8 +132,10 @@ console.log(optionSelected);
           <span />
         )}
 
+        <NavButton onClick ={onClearBtnClick} body={"Clear"}/>
+
         {questionIndex === questions.length - 1 ? (
-          <NavButton onClick={onNextBtnClick} body={"Submit"} />
+          <NavButton onClick={onBtnSubmitClick} body={"Submit"}  />
         ) : (
           <NavButton onClick={onNextBtnClick} body={"Next"} />
         )}
