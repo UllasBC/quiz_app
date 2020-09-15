@@ -19,8 +19,9 @@ export function QuestionsPage(props) {
   // ];
 
   const getQuestions = ()=>{
-    fetch('https://run.mocky.io/v3/2a2df284-f50e-4389-81ed-2ae208ed335a')
-    .then(res=>res.json())
+    fetch("https://run.mocky.io/v3/d12d2ebc-500e-4150-9065-647a8717661a")
+    .then((res)=>res.json())
+    .then((res)=>setQuestionState(res.questions))
 
   }
 
@@ -31,7 +32,7 @@ export function QuestionsPage(props) {
   //Hooks for state management
   const [questionIndex, setQuestionIndex] = useState(0);
   const [optionSelected, setOptionSelected] = useState({});
-  const [questions, setQuestionsState] = useState([]);
+  const [questions, setQuestionState] = useState([]);
 
   //Option button function
   const onOptionChange = (optionIndex) => {
@@ -114,16 +115,16 @@ export function QuestionsPage(props) {
         } */}
       <div className="answerOptions">
         {questions.length > 0 && questions[questionIndex].options.map((item, index) => (
-          <Option
+          <Option key ={index}
             onChange={onOptionChange}
             checked={
               questionIndex in optionSelected &&
-              optionSelected[questionIndex] === index + 1
+              optionSelected[questionIndex] === index 
                 ? true
                 : false
             }
             body={`${index + 1}. ${item}`}
-            optionIndex={index + 1}
+            optionIndex={index}
           />
         ))}
       </div>
